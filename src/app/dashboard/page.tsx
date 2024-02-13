@@ -1,12 +1,12 @@
 'use client';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@shiva/hooks/redux';
 import { logoutUser } from '@shiva/redux/modules/auth';
 import Link from 'next/link';
 
 export default function DashboardPage() {
-  const auth = useSelector((state) => state.auth);
+  const auth = useAppSelector((state) => state.auth);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleLogOut = () => {
     dispatch(logoutUser());

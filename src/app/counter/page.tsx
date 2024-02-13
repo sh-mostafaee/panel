@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@shiva/components/Button';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   applyCountInput,
   increaseOne,
@@ -13,9 +12,11 @@ import {
   setCountInput,
 } from '@shiva/redux/modules/counter';
 import { Input } from '@shiva/components/Input';
+import { useAppDispatch, useAppSelector } from '@shiva/hooks/redux';
+import { ChangeEvent } from 'react';
 
 export default function CounterPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handlePlusOne = () => {
     dispatch(increaseOne());
@@ -34,18 +35,18 @@ export default function CounterPage() {
     dispatch(reset());
   };
 
-  const handleCountInputChange = (e) => {
+  const handleCountInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setCountInput(Number(e.target.value)));
   };
 
   const handleApply = () => {
     dispatch(applyCountInput());
   };
-  const handleChangeInputChange = (e) => {
+  const handleChangeInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setChangeInput(Number(e.target.value)));
   };
 
-  const counterState = useSelector((state) => state.counter);
+  const counterState = useAppSelector((state) => state.counter);
   console.log(counterState, 'pis pis');
   return (
     <div>

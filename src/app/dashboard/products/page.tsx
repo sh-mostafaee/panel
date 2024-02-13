@@ -1,23 +1,22 @@
 'use client';
-
-import { useSelector } from 'react-redux';
 import ProductCounter from '@shiva/components/Products/ProductCounter';
 import { ProductPrice } from '@shiva/components/Products/ProductPrice';
 import { Input } from '@shiva/components/Input';
 import { useState } from 'react';
 import { ProductItem } from '@shiva/components/Products/ProductItem';
+import { useAppSelector } from '@shiva/hooks/redux';
 
 export default function Products() {
-  const products = useSelector((state) => state.products);
+  const products = useAppSelector((state) => state.products);
   const [promoInput, setPromoInput] = useState();
-  const promoCodes = useSelector((state) => state.promo.codes);
+  const promoCodes = useAppSelector((state) => state.promo.codes);
   const [applyPromo, setApplyPromo] = useState(false);
 
   console.log(promoCodes, 'promoCodes promoCodes');
 
   const totalPrice = products.cart.reduce((acc, item) => {
     const productDetails = products.data.find((product) => product.id === item.productId);
-    acc += productDetails.price * item.quantity;
+    acc += (productDetails?.price || 0) * item.quantity;
     return acc;
   }, 0);
   const totalPriceWithPromo = applyPromo ? totalPrice - totalPrice / 10 : totalPrice;
@@ -67,7 +66,7 @@ export default function Products() {
               <div key={item.productId} className="pb-4">
                 <div>{productDetails?.name}</div>
                 <div className="bg-black">
-                  <ProductPrice price={productDetails.price} />
+                  {productDetails?.price ? <ProductPrice price={productDetails.price} /> : null}
                 </div>
                 <ProductCounter productId={item.productId} quantity={item.quantity} />
               </div>

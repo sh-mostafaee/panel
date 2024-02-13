@@ -1,8 +1,8 @@
 'use client';
 
-import { useDispatch, useSelector } from 'react-redux';
 import { addPromoCode, deletePromoCode, toggleCheck } from '@shiva/redux/modules/poromo';
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@shiva/hooks/redux';
+import { ChangeEvent } from 'react';
 
 const CAPITALS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const SMALLS = CAPITALS.join('').toLowerCase().split('');
@@ -20,23 +20,25 @@ function getRndInteger(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const shuffle = (str) => [...str].sort(() => Math.random() - 0.5).join('');
+const shuffle = (str: string) =>
+  str
+    .split('')
+    .sort(() => Math.random() - 0.5)
+    .join('');
 
 const promoLength = 10;
 
 export default function PromoCodePage() {
-  const dispatch = useDispatch();
-  const promoState = useSelector((state) => state.promo);
+  const dispatch = useAppDispatch();
+  const promoState = useAppSelector((state) => state.promo);
 
-  const handleChangeCapitalAlphabets = (e) => {
+  const handleChangeCapitalAlphabets = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(toggleCheck(e.target.name));
   };
 
-  console.log(promoState, 'hamed man delm dard mikone');
-
   const handleGeneratePromoCode = () => {
     const haveAnyChecks = promoState.checks.filter((item) => item.value);
-    console.log(haveAnyChecks, 'biya');
+
     if (haveAnyChecks.length === 0) {
       alert('please check at least one of the items');
       return;
@@ -45,7 +47,7 @@ export default function PromoCodePage() {
     const from = promoLength < 6 ? 1 : 2;
     const to = Math.ceil(promoLength / haveAnyChecks.length);
 
-    const randoms = [];
+    const randoms: string[] = [];
     let randomIndexes = 0;
     haveAnyChecks.forEach((item, index) => {
       const isLastIndex = index === haveAnyChecks.length - 1;

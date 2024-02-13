@@ -15,8 +15,15 @@ export const deletePromoCode = (payload: string) => ({
   payload,
 });
 
+export enum PromoChar {
+  capitals = 'capitals',
+  smalls = 'smalls',
+  numbers = 'numbers',
+  characters = 'characters',
+}
+
 export type PromoCheck = {
-  name: string;
+  name: PromoChar;
   value: boolean;
   title: string;
 };
@@ -33,22 +40,22 @@ export type PromoState = {
 const promoInitialState: PromoState = {
   checks: [
     {
-      name: 'capitals',
+      name: PromoChar.capitals,
       value: true,
       title: 'Capital Letters',
     },
     {
-      name: 'smalls',
+      name: PromoChar.smalls,
       value: true,
       title: 'Small Letters',
     },
     {
-      name: 'characters',
+      name: PromoChar.characters,
       value: false,
       title: 'Characters',
     },
     {
-      name: 'numbers',
+      name: PromoChar.numbers,
       value: false,
       title: 'Numbers',
     },

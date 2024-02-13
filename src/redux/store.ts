@@ -18,6 +18,12 @@ const reducers = combineReducers({
   products: productsReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+const persistedReducer = persistReducer(persistConfig, reducers as any);
+const normalStore = createStore(reducers);
 export const store = createStore(persistedReducer);
 export const persistor = persistStore(store);
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof normalStore.getState>;
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof normalStore.dispatch;

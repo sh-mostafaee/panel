@@ -1,4 +1,5 @@
 import { User } from '@shiva/db/user.type';
+import { AnyAction } from 'redux';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const SET_USERNAME_INPUT = 'SET_USERNAME_INPUT';
@@ -17,7 +18,7 @@ export const logoutUser = () => ({
   type: LOGOUT_USER,
 });
 
-export const setUsernameInput = (payload: String) => ({
+export const setUsernameInput = (payload: string) => ({
   type: SET_USERNAME_INPUT,
   payload,
 });
@@ -39,7 +40,7 @@ export const authInitialState: AuthState = {
   passwordInput: '',
 };
 
-export const authReducer = (state: AuthState = authInitialState, action: LoginUserAction) => {
+export const authReducer = (state: AuthState = authInitialState, action: AnyAction) => {
   switch (action.type) {
     case LOGIN_USER:
       return {

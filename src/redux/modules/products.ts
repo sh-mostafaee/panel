@@ -110,7 +110,7 @@ export const productsReducer = (
 
   if (action.type === REMOVE_FROM_CART) {
     const foundItem = state.cart.find((item) => item.productId === action.payload);
-    if (foundItem?.quantity >= 2) {
+    if (foundItem?.quantity && foundItem.quantity >= 2) {
       return {
         ...state,
         cart: state.cart.map((item) => {

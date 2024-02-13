@@ -3,17 +3,16 @@
 import { Input } from '@shiva/components/Input';
 import { Button } from '@shiva/components/Button';
 import { ChangeEvent, ChangeEventHandler, FormEvent, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, setPasswordInput, setUsernameInput } from '@shiva/redux/modules/auth';
 import users from '@shiva/db/user.json';
 import { useRouter } from 'next/navigation';
+import { useAppDispatch, useAppSelector } from '@shiva/hooks/redux';
 
 export default function LoginPage() {
-  const dispatch = useDispatch();
-  const authState = useSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const authState = useAppSelector((state) => state.auth);
   const router = useRouter();
   const handleLogin = (e: FormEvent) => {
-    console.log(authState, 'manm');
     e.preventDefault();
     const foundUser = users.data.find((user) => user.username === authState.usernameInput);
     if (foundUser && foundUser.password === authState.passwordInput) {
