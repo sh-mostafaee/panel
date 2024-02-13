@@ -10,6 +10,7 @@ export type Product = {
   id: number;
   name: string;
   price: number;
+  image: string;
 };
 
 export type CartItem = {
@@ -37,36 +38,43 @@ export const productsInitialState: ProductsState = {
       id: 1,
       name: 'iPhone 15',
       price: 20000,
+      image: '/images/iphone15.webp',
     },
     {
       id: 2,
       name: 'iPhone 12',
       price: 4444,
+      image: '/images/iphone12.webp',
     },
     {
       id: 3,
       name: 'iPhone 13',
       price: 2546,
+      image: '/images/iphone13.webp',
     },
     {
       id: 4,
-      name: 'samsung note3',
+      name: 'Samsung Note3',
       price: 10000,
+      image: '/images/iphone15.webp',
     },
     {
       id: 5,
       name: 'LG',
       price: 48592,
+      image: '/images/lg.webp',
     },
     {
       id: 6,
-      name: 'sumsung a10',
+      name: 'Sumsung a10',
       price: 30000,
+      image: '/images/samsung a10.webp',
     },
     {
       id: 7,
-      name: 'sumsung a20',
+      name: 'Sumsung a20',
       price: 88890,
+      image: '/images/samsung a20.webp',
     },
   ],
   cart: [],

@@ -17,7 +17,7 @@ export default function ProductCounter(props: ProductCounterProps) {
   };
 
   return (
-    <div className={'flex'}>
+    <div className={'flex items-center justify-center'}>
       <button
         className={'border rounded-full w-[20px] h-[20px] flex items-center justify-center '}
         onClick={handleRemove}

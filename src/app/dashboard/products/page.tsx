@@ -5,6 +5,7 @@ import ProductCounter from '@shiva/components/Products/ProductCounter';
 import { ProductPrice } from '@shiva/components/Products/ProductPrice';
 import { Input } from '@shiva/components/Input';
 import { useState } from 'react';
+import { ProductItem } from '@shiva/components/Products/ProductItem';
 
 export default function Products() {
   const products = useSelector((state) => state.products);
@@ -34,27 +35,40 @@ export default function Products() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3">
       <div className="col-span-1 md:col-span-2">
+        {/* <div className="grid-cols-3 grid gap-4 p-8 mx-4">
+          <div>
+            <ProductItem image="/images/iphone12.jpeg" price={500} title="iPhone12" className="" />
+          </div>
+          <div>
+            <ProductItem image="/images/iphone13.jpeg" price={700} title="iPhone13" className="" />
+          </div>
+          <div>
+            <ProductItem image="/images/iphone15.jpeg" price={1000} title="iPhone15" className="" />
+          </div>
+        </div> */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {products.data.map((product) => (
-            <div key={product.id} className={'border border-black'}>
-              <p>{product.name}</p>
-              <ProductPrice price={product.price} />
-              <ProductCounter
-                productId={product.id}
-                quantity={products.cart.find((item) => item.productId === product.id)?.quantity ?? 0}
-              />
-            </div>
+            <ProductItem
+              title={product.name}
+              image={product.image}
+              key={product.id}
+              price={product.price}
+              productId={product.id}
+              quantity={products.cart.find((item) => item.productId === product.id)?.quantity ?? 0}
+            />
           ))}
         </div>
       </div>
-      <div className="col-span-1">
+      <div className="col-span-2 mt-16 w-80 border rounded-lg h-40 px-4">
         {products.cart.length ? (
           products.cart.map((item) => {
             const productDetails = products.data.find((product) => product.id === item.productId);
             return (
-              <div key={item.productId}>
+              <div key={item.productId} className="pb-4">
                 <div>{productDetails?.name}</div>
-                <ProductPrice price={productDetails.price} />
+                <div className="bg-black">
+                  <ProductPrice price={productDetails.price} />
+                </div>
                 <ProductCounter productId={item.productId} quantity={item.quantity} />
               </div>
             );

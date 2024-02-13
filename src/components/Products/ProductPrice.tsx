@@ -4,5 +4,6 @@ export type ProductPriceProps = {
 
 export function ProductPrice(props: ProductPriceProps) {
   const { price } = props;
-  return <p>${price.toLocaleString()}</p>;
+
+  <p>${price.toLocaleString()}</p>;
 }
